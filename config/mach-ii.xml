@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mach-ii PUBLIC "-//Mach-II//DTDMach-II Configuration 1.5.0//EN" "http://www.mach-ii.com/dtds/mach-ii_1_5_0.dtd">
+<mach-ii version="1.8">
+
+
+	<endpoints>
+		<endpoint name="userinfo" type="Assessment.API.v1.endpoints.usersendpoint" />		
+	</endpoints>
+
+	<!-- PROPERTIES -->
+	<properties>
+		<property name="applicationRoot" value="/Assessment" />
+		<!--
+		<property name="defaultEvent" value="showLogin" />
+		-->
+		
+		<property name="defaultEvent" value="validateCASLogin" />
+		
+		<property name="eventParameter" value="event" />
+		<property name="parameterPrecedence" value="form" />
+		<property name="maxEvents" value="10" />
+		<property name="exceptionEvent" value="exceptionEvent" />
+		<!--
+		<property name="appProperties" 		type="config.properties" />
+	-->
+		<property name="coldspringProperty" type="coldspring.machii.ColdspringProperty">
+			<parameters>
+				<parameter name="beanFactoryPropertyName" 		 value="serviceFactory"/>
+				<parameter name="configFile" 			  		 value="/Assessment/config/coldspring/services.xml.cfm" />
+				<parameter name="resolveMachIIDependencies"      value="true"/>
+				<parameter name="placeFactoryInApplicationScope" value="true" /> 
+				<!-- Whether path is relative (mapped) or absolute - Default: FALSE 
+				<parameter name="configFilePathIsRelative" value="true"/>-->
+				<parameter name="resolveMachIIDependencies" 	 value="true"/>				
+			</parameters>
+		</property>
+		<property name="dsn" value="RW_Assessment_PROD" />
+	</properties>
+
+	<!-- PLUGINS -->
+	<plugins>
+		<!--
+		<plugin name="yourPluginName" type="fullyQualifiedDotDelimitedPathToCFC">
+			<parameters>
+				<parameter name="yourParameterName" value="yourParameterValue" />
+			</parameters>
+		</plugin>
+		-->
+	</plugins>
+
+	<!-- EVENT-FILTERS -->
+	<event-filters>
+	</event-filters>
+
+	<!-- LISTENERS -->
+	<listeners>
+		<listener name="loginListener" type="Assessment.listeners.LoginListener" />
+		<listener name="UserListener" type="Assessment.listeners.UserListener" />
+		<listener name="ReportingUnitListener" type="Assessment.listeners.ReportingUnitListener" />
+		<listener name="AssessmentPlanListener" type="Assessment.listeners.AssessmentPlanListener" />
+		<listener name="UserRoleListener" type="Assessment.listeners.UserRoleListener" />
+		<listener name="UserRoleAccessListener" type="Assessment.listeners.UserRoleAccessListener" />
+        <listener name="AssessmentPlanOutcomeListener" type="Assessment.listeners.AssessmentPlanOutcomeListener" />	
+        <listener name="ALCCategoriesListener" type="Assessment.listeners.ALCCategoriesListener" />		
+        <listener name="ALCDocumentsListener" type="Assessment.listeners.ALCDocumentsListener" />	
+        <listener name="AssessmentPlanSupportingDocumentsListener" type="Assessment.listeners.AssessmentPlanSupportingDocumentsListener" />
+      	<listener name="CampusListener" type="Assessment.listeners.CampusListener" />
+        <listener name="organizationSuperDivisionListener" type="Assessment.listeners.OrganizationSuperDivisionListener" />
+        <listener name="organizationDivisionListener" type="Assessment.listeners.OrganizationDivisionListener" />
+        <listener name="OrganizationDeptListener" type="Assessment.listeners.OrganizationDeptListener" />
+        <listener name="MessageListener" type="Assessment.listeners.MessageListener" />
+        <listener name="AssessmentPlanChecklistTypeListener" type="Assessment.listeners.AssessmentPlanChecklistTypeListener" />
+        <listener name="AssessmentPlanChecklistRatingsListener" type="Assessment.listeners.AssessmentPlanChecklistRatingsListener" />
+        <listener name="departmentalPerformanceReviewListener" type="Assessment.listeners.departmentalPerformanceReviewListener" />
+        <listener name="AssessmentPlanWorkflowListener" type="Assessment.listeners.AssessmentPlanWorkflowListener" />        
+        <listener name="programImprovementCodesListener" type="Assessment.listeners.programImprovementCodesListener" />  
+        <listener name="AssessmentALCOutcomeCategoriesListener" type="Assessment.listeners.AssessmentALCOutcomeCategoriesListener" />  
+        <listener name="TaskListener" type="Assessment.listeners.taskListener" />  
+        <listener name="AssessmentStrategicPlanLinksListener" type="Assessment.listeners.AssessmentStrategicPlanLinksListener" />   
+        <listener name="strategicPlanGoalsListener" type="Assessment.listeners.strategicPlanGoalsListener" />         
+        <listener name="outcomeStrategicPlanGoalsListener" type="Assessment.listeners.outcomeStrategicPlanGoalsListener" />
+        <listener name="ChecklistCommentsListener" type="Assessment.listeners.ChecklistCommentsListener" />
+     </listeners>
+	
+	<!-- EVENT-HANDLERS -->
+	<event-handlers>
+
+		<event-handler event="sayHello" access="public">
+			<view-page name="hello"  />
+		</event-handler>
+
+		<event-handler event="getUserList" access="public">
+			<notify listener="UserListener" method="getUserList" resultArg="qUsers"  />
+			<view-page name="listUsers"  contentArg="content" />
+			<view-page name="layout" />
+		</event-handler>
+
+		<event-handler event="showLogin" access="public">
+			<view-page name="loginForm" contentArg="content" />
+			<view-page name="layout" />
+		</event-handler>
+
+		<event-handler event="noLogin" access="public">
+			<notify listener="loginListener" method="nologinnotification" />
+			<view-page name="no_login" />
+		</event-handler>
+
+		<event-handler event="validateLogin" access="public">
+			<notify listener="loginListener" method="validateLogin" />
+		</event-handler>
+		
+		<event-handler event="validateCASLogin" access="public">
+			<notify listener="loginListener" method="validateCASLogin" />
+		</event-handler>
+
+		<event-handler event="logout" access="public">
+			<notify listener="loginListener" method="logout" />
+		</event-handler>
+
+		<event-handler event="forgot" access="public">
+			<view-page name="forgot" contentArg="content" />
+			<view-page name="layout" />
+		</event-handler>
+
+		<event-handler event="sendLogin" access="public">
+			<notify listener="messageListener" method="sendLogin"  resultArg="layout_message" />
+			<view-page name="sentLogin" contentArg="content" />
+			<view-page name="layout" />
+		</event-handler>
+
+		<event-handler event="ChooseUserRoleForSession" access="public">
+			<notify listener="UserListener" method="getUserBean" resultArg="userBean"  />
+			<event-arg name="userid" variable="session.userid" />
+			<notify listener="UserRoleListener" method="getUserRoleLevels" resultArg="qUserRoles"  />
+			<notify listener="UserRoleListener" method="getAllUserRoleLevels" resultArg="qAllUserRoles"  />
+			<view-page name="userrole" contentArg="content" />
+			<view-page name="layout" />
+		</event-handler>e
+
+		<event-handler event="updateUserRole" access="public">
+			<notify listener="UserRoleListener" method="updateUserRole" />			
+		</event-handler>
+		
+		<event-handler event="SetUserRoleForSession" access="public">
+			<event-arg name="userid" variable="session.userid" />
+			<notify listener="UserListener" method="SetUserRole" />
+		</event-handler>
+
+		<event-handler event="showUserDashboard" access="public">
+			<notify listener="AssessmentPlanListener" method="getLOPlanTotals" resultArg="qLearningOutcomes" />
+			<notify listener="AssessmentPlanListener" method="getResearchPlanTotals" resultArg="qResearchPlans" />
+			<notify listener="AssessmentPlanListener" method="getAdminPlanTotals" resultArg="qAdminPlans" />
+			<notify listener="AssessmentPlanListener" method="getServicePlanTotals" resultArg="qServicePlans" />
+			<notify listener="messageListener" method="getInboxMessages" resultArg="qInboxMessages" />
+			<notify listener="taskListener" method="getTasks" resultArg="qTasks" />
+			<view-page name="dash_main" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="addTask" access="public">
+			<notify listener="taskListener" method="addTask" resultArg="forJSON" />
+			<view-page name="toJSON"/>
+		</event-handler>
+
+		<event-handler event="updateTask" access="public">
+			<notify listener="taskListener" method="updateTask" />			
+		</event-handler>
+
+		<event-handler event="deleteTask" access="public">
+			<notify listener="taskListener" method="deleteTask" />			
+		</event-handler>
+
+		<event-handler event="ShowReportingUnits" access="public">
+			<notify listener="UserRoleListener" method="getDefaultUserRole" resultArg="UserRoleRecordID"  />
+			<notify listener="UserRoleAccessListener" method="getUserRoleAccessIDs" resultArg="qUserAccessIDs"  />
+			<!-- Need to pass in DivisionID, SuperDivisionID,OrganizationID-->
+			<notify listener="ReportingUnitListener" method="getReportingUnitsQuery" resultArg="qreportingUnits"  />
+			<notify listener="ReportingUnitListener" method="getAdminReportingUnitsQuery" resultArg="qAdminReportingUnits"  />
+			<view-page name="reportingunits" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="ShowAssessmentPlanList" access="public">
+			<notify listener="AssessmentPlanListener" method="getAssessmentPlanPeriodsQuery" resultArg="planperiods"  />
+			<view-page name="assessmentplanlist" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="showStatus" access="public">
+			<notify listener="AssessmentPlanListener" method="getPlanStatusByPlanID" resultArg="selectedplanstatus"  />
+			<notify listener="AssessmentPlanWorkflowListener" method="getPlanStatuses" resultArg="qPlanStatuses"  />
+			<view-page name="assessmentplanstatus" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<!-- TO DO -->
+		<event-handler event="saveStatus" access="public">
+			<event-arg name="successEvent" value="ShowAssessmentPlanList"/>
+			<notify listener="AssessmentPlanListener" method="saveStatus"  />
+		</event-handler>
+		
+
+		<event-handler event="ShowPlan" access="public">
+			<notify listener="ALCCategoriesListener" method="getALCCheckboxes" resultArg="qALCCategories"  />
+			<notify listener="AssessmentPlanListener" method="getAssessmentPlanDetails" resultArg="qPlanDetails"  />
+			<notify listener="AssessmentPlanChecklistTypeListener" method="getChecklistTypes" resultArg="qCheckListTypes"  />
+			<notify listener="AssessmentPlanChecklistRatingsListener" method="getRatings" resultArg="qRatings"  />
+			<notify listener="AssessmentPlanOutcomeListener" method="countOutcomes" resultArg="qcountOutcomes"  />
+			<notify listener="UserListener" method="getPrimaryAuthors" resultArg="qPrimaryAuthors"  />
+			<notify listener="strategicPlanGoalsListener" method="getGoalList" resultArg="qGoalList"  />
+			<!-- 
+			<notify listener="strategicPlanGoalsListener" method="getGoalList" resultArg="qGoalList"  />
+			<notify listener="outcomeStrategicPlanGoalsListener" method="getSelectedGoals" resultArg="qSelectedGoals" />
+			-->
+			<view-page name="assessmentplan" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+
+		<event-handler event="saveChecklistComment" access="public">
+			<notify listener="ChecklistCommentsListener" method="saveComments" />
+			<!-- <view-page name="dash_layout" /> -->
+		</event-handler>
+
+		
+		<event-handler event="getChecklistComments" access="public">
+			<notify listener="ChecklistCommentsListener" method="getChecklistComments" resultArg="qChecklistcomments" />
+			<notify listener="ChecklistCommentsListener" method="getChecklistCommentDetails" resultArg="qChecklistCommentDetails"  />
+			<view-page name="checklistcomments" />
+		</event-handler>
+
+
+		<event-handler event="showDepartmentPlanList" access="public">
+			<notify listener="AssessmentPlanListener" method="getAssessmentPlanPeriodsQuery" resultArg="planperiods"  />
+			<notify listener="departmentalPerformanceReviewListener" method="getReviewPeriods" resultArg="reviewPeriods"  />
+			<notify listener="departmentalPerformanceReviewListener" method="getReviewPlanPeriods" resultArg="reviewPlanPeriods"  />
+			<view-page name="departmentplanlist" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="showDeptReview" access="public">
+			<notify listener="departmentalPerformanceReviewListener" method="getDeptReviewDetails" resultArg="qReviewDetails"  />
+			<view-page name="departmentReview" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+
+		<event-handler event="saveDeptReview" access="public">
+			<notify listener="departmentalPerformanceReviewListener" method="saveDeptReviewDetails"  />
+		</event-handler>
+
+		<event-handler event="addNewReviewPlan" access="public">
+			<notify listener="departmentalPerformanceReviewListener" method="addNewReviewPlan"  />
+		</event-handler>
+
+
+		<event-handler event="outcomedetails" access="public">
+			<notify listener="ALCCategoriesListener" method="getALCCheckboxes" resultArg="qALCCategories"  />
+			<notify listener="AssessmentPlanListener" method="getAssessmentPlanDetails" resultArg="qPlanDetails"  />
+			<notify listener="AssessmentPlanOutcomeListener" method="getOutcomeDetail" resultArg="qOutcomeDetail"  />
+			<notify listener="AssessmentPlanSupportingDocumentsListener" method="getOutcomeSupportingDocs" resultArg="qSupportingDocs"  />
+			<notify listener="programImprovementCodesListener" method="getCodesList" resultArg="qCodesList"  />
+			<notify listener="AssessmentPlanOutcomeListener" method="getSelectedProgImpCodes" resultArg="qSelectedProgImpCodes"  />
+			<notify listener="strategicPlanGoalsListener" method="getGoalList" resultArg="qGoalList"  />
+			<notify listener="outcomeStrategicPlanGoalsListener" method="getGoalsByOutcomeID" resultArg="qSelectedGoals" />
+			<notify listener="UserListener" method="getPrimaryAuthors" resultArg="qPrimaryAuthors"  />
+			
+			<view-page name="outcomedetails" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="saveOutcomeOrder" access="public">
+			<notify listener="AssessmentPlanOutcomeListener" method="saveOutcomeOrder" />
+
+		</event-handler>
+
+		<event-handler event="uploaddocument">
+			<notify listener="AssessmentPlanSupportingDocumentsListener" method="uploaddocument" />
+			<!-- 
+			<redirect event="outcomeDetails" args="reportingUnitID,outcomeID,planID,ProgramID" />
+			
+			<view-page name="upload" /> 
+			-->
+		</event-handler>
+
+		<event-handler event="downloadDocument">
+			<notify listener="AssessmentPlanSupportingDocumentsListener" method="downloadDocument" />			
+		</event-handler>
+
+		<event-handler event="deleteDocument">
+			<event-arg name="successEvent" value="outcomedetails"/>
+			<notify listener="AssessmentPlanSupportingDocumentsListener" method="deleteDocument" />			
+		</event-handler>
+
+		<event-handler event="uploadALCdocument">
+			<notify listener="ALCDocumentsListener" method="uploadALCdocument" />
+			<redirect event="viewALC" args="reportingUnitID" />
+		</event-handler>
+
+
+		<event-handler event="downloadALCdocument">
+			<notify listener="ALCDocumentsListener" method="downloadALCdocument" />			
+		</event-handler>
+
+		<event-handler event="deleteALCdocument">
+			<event-arg name="successEvent" value="viewALC"/>
+			<notify listener="ALCDocumentsListener" method="deleteALCDocument" />			
+		</event-handler>
+
+		<event-handler event="saveCheckList">
+			<notify listener="AssessmentPlanChecklistRatingsListener" method="saveRatings" />
+			<redirect event="showPlan" args="reportingUnitID,PlanID" />
+			<!-- <view-page name="upload" /> -->
+		</event-handler>
+
+		<event-handler event="updatepassword" access="public">
+			<notify listener="UserListener" method="updatepassword" />	
+			<redirect event="accountsettings#security" args="notification" />
+		</event-handler>
+
+		<event-handler event="updateContactInfo" access="public">
+			<notify listener="UserListener" method="updateContactInfo" />	
+			<redirect event="accountsettings#security" args="notification" />
+		</event-handler>
+
+		<event-handler event="faq" access="public">
+			<view-page name="faq" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="messagecenter" access="public">
+			<notify listener="messageListener" method="getInboxMessages" resultArg="qInboxMessages" />
+			<notify listener="messageListener" method="getSentMessages"  resultArg="qSentMessages" />
+			<notify listener="messageListener" method="getDeletedMessages"  resultArg="qDeletedMessages" />
+			<view-page name="messagecenter" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="acceptplan" access="public">
+			<notify listener="UserListener" method="getUserList" resultArg="qUsers"  />
+			<view-page name="writemessage" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="requestrevision" access="public">
+			<notify listener="UserListener" method="getUserList" resultArg="qUsers"  />
+			<view-page name="writemessage" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="writemessage" access="public">
+			<notify listener="UserListener" method="getUserList" resultArg="qUsers"  />
+			<view-page name="writemessage" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="sendmessage" access="public">
+			<notify listener="messageListener" method="sendMessage"  />
+			<redirect event="messagecenter" args="layout_message" />
+		</event-handler>
+
+		<event-handler event="sendmessagewithstatusupdate" access="public">
+			<notify listener="messageListener" method="sendmessagewithstatusupdate"  />			
+		</event-handler>
+
+
+		<event-handler event="deletemessage" access="public">
+			<notify listener="messageListener" method="deletemessage"  />
+			<redirect event="messagecenter" args="layout_message" />
+		</event-handler>
+
+		<event-handler event="viewmessage" access="public">
+			<notify listener="messageListener" method="viewmessage" resultArg="qViewMessage"  />
+			<view-page name="viewmessage" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="accountsettings" access="public">
+			<notify listener="UserListener" method="getUserDetails" resultArg="qUserDetails"  />
+			<notify listener="UserRoleListener" method="getAllUserRoleLevels" resultArg="qAllRoles"  />
+			<notify listener="UserRoleListener" method="getUserRoleLevels" resultArg="qUserRoles"  />
+			<notify listener="campusListener" method="getAllCampuses" resultArg="qCampuses"  />
+			<view-page name="accountsettings" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="reports" access="public">
+			<notify listener="OrganizationSuperDivisionListener" method="getSuperDivisions" resultArg="qSuperDivisions"  />
+			<notify listener="AssessmentPlanListener" method="getPlanPeriods" resultArg="qPlanPeriods"  />
+			<notify listener="AssessmentPlanListener" method="getPlanTypes" resultArg="qPlanTypes"  />
+			<notify listener="AssessmentPlanWorkflowListener" method="getPlanStatuses" resultArg="qPlanStatuses"  />
+			<view-page name="reports" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<event-handler event="getDivisionjson" access="public">
+			<!-- query for divisions by superDivisionID -->
+			<notify listener="OrganizationDivisionListener" method="getDivisions" resultArg="qDivisionResults"  />
+			
+			<view-page name="json"/>			
+		</event-handler>
+
+		<event-handler event="getDeptjson" access="public">
+			<!-- query for divisions by superDivisionID -->
+			<notify listener="OrganizationDeptListener" method="getDepartments" resultArg="qDepartmentResults"  />
+			
+			<view-page name="json"/>			
+		</event-handler>
+
+		<event-handler event="redirectToReport" access="public">
+			<!--
+			<notify listener="OrganizationDivisionListener" method="getDivisions" resultArg="qDivisionResults"  />
+			-->
+		</event-handler>
+
+		<event-handler event="getPlanGrid" access="public">
+			<notify listener="AssessmentPlanListener" method="getPlanGrid" resultArg="qPlanGrid"  />
+			<view-page name="grid"/>			
+		</event-handler>
+
+		<event-handler event="getReportGrid" access="public">
+			<notify listener="AssessmentPlanWorkflowListener" method="getReportGrid" resultArg="qReportGrid"  />
+			<view-page name="reportGrid"/>			
+		</event-handler>
+
+		<event-handler event="json" access="public">
+			<view-page name="json"/>			
+		</event-handler>
+
+		<!-- add a plan -->
+		<event-handler event="addPlan" access="public">
+			<notify listener="AssessmentPlanListener" method="getPlanTypes" resultArg="qPlanTypes"  />
+			<!-- query plan authors -->
+			<notify listener="UserListener" method="getPrimaryAuthors" resultArg="qPrimaryAuthors"  />
+			
+			<notify listener="AssessmentPlanListener" method="getPlanPeriods" resultArg="qPlanPeriods"  />
+
+			<view-page name="addPlanWizard" contentArg="content"/>
+			<view-page name="dash_layout" />
+		</event-handler>
+		
+		<!-- add a plan -->
+		<event-handler event="createPlan" access="public">
+		
+			<notify listener="AssessmentPlanListener" method="createPlan"  />
+			<!--
+			TO DO: Copy previous years outcomes over to new plan
+			-->
+			<view-page name="editPlan" contentArg="content"/>
+			<view-page name="dash_layout" />
+			
+		</event-handler>
+
+		<!-- add an outcome -->
+		<event-handler event="addOutcome" access="public">
+			<notify listener="ALCCategoriesListener" method="getALCCheckboxes" resultArg="qALCCategories"  />
+			<notify listener="AssessmentPlanListener" method="getAssessmentPlanDetails" resultArg="qPlanDetails"  />
+			<notify listener="AssessmentPlanOutcomeListener" method="countOutcomes" resultArg="qcountOutcomes"  />
+			<notify listener="strategicPlanGoalsListener" method="getGoalList" resultArg="qGoalList"  />
+			<notify listener="UserListener" method="getPrimaryAuthors" resultArg="qPrimaryAuthors"  />
+			<view-page name="addOutcome" contentArg="content"/>
+			<view-page name="dash_layout" />
+		</event-handler>
+
+		<!-- edit an outcome -->
+		<event-handler event="editOutcome" access="public">
+			<notify listener="ALCCategoriesListener" method="getALCCheckboxes" resultArg="qALCCategories"  />
+			<notify listener="AssessmentPlanListener" method="getAssessmentPlanDetails" resultArg="qPlanDetails"  />
+			<notify listener="ALCCategoriesListener" method="getALCCategoriesSelected" resultArg="qSelectedALCCategories"  />
+			<notify listener="AssessmentPlanOutcomeListener" method="getOutcomeDetail" resultArg="qcountOutcomes"  />
+			<notify listener="programImprovementCodesListener" method="getCodesList" resultArg="qCodesList"  />
+			<notify listener="AssessmentPlanOutcomeListener" method="getSelectedProgImpCodes" resultArg="qSelectedProgImpCodes"  />
+			<notify listener="strategicPlanGoalsListener" method="getGoalList" resultArg="qGoalList"  />
+			<notify listener="outcomeStrategicPlanGoalsListener" method="getGoalsByOutcomeID" resultArg="qSelectedGoals" />
+			<notify listener="UserListener" method="getPrimaryAuthors" resultArg="qPrimaryAuthors"  />
+			<view-page name="editOutcome" contentArg="content"/>
+			<view-page name="dash_layout" />
+		</event-handler>
+
+
+		<event-handler event="saveOutcome" access="public">
+			<notify listener="AssessmentPlanOutcomeListener" method="saveOutcome" resultArg="outcomeID"/>
+			<notify listener="AssessmentALCOutcomeCategoriesListener" method="saveALCCategoriesSelected" />
+			<!-- <notify listener="strategicPlanGoalsListener" method="saveGoals" /> -->
+			<notify listener="AssessmentStrategicPlanLinksListener" method="saveGoals" />
+			<notify listener="AssessmentPlanOutcomeListener" method="saveProgImpCodes"/>
+			<redirect event="showplan" args="reportingUnitID,PlanID" />
+		</event-handler>
+
+		<event-handler event="deleteOutcome" access="public">
+			<notify listener="AssessmentPlanOutcomeListener" method="deleteOutcome" />			
+			<redirect event="showplan" args="reportingUnitID,PlanID" />
+		</event-handler>
+
+
+		<event-handler event="viewALC" access="public">			
+			<notify listener="ALCDocumentsListener" method="getALCDocs" resultArg="qALCdocs"  />
+			<view-page name="viewALC" contentArg="content" />
+			<view-page name="dash_layout" />
+		</event-handler>
+				
+
+		<event-handler event="showInputForm" access="public">
+			<view-page name="inputForm" />
+		</event-handler>
+				
+		<event-handler event="loginSucceeded" access="private">
+			<view-page name="mainMenu" />
+		</event-handler>
+		
+		<event-handler event="loginFailed" access="private">
+			<announce event="showLoginForm" copyEventArgs="true" />
+		</event-handler>
+		
+		<event-handler event="exceptionEvent" access="private">
+			<view-page name="exception" />
+		</event-handler>
+	</event-handlers>
+	
+	<!-- PAGE-VIEWS -->
+	<page-views>
+		<page-view name="layout" page="/views/layout.cfm"/>
+		<page-view name="dash_layout" page="/views/dash_layout.cfm"/>
+		<page-view name="dash_main" page="/views/dash_main.cfm"/>
+		<page-view name="page_header" page="/views/page_header.cfm"/>
+		<page-view name="faq" page="/views/faq.cfm"/>
+		<page-view name="messagecenter" page="/views/messagecenter.cfm"/>
+		<page-view name="writemessage" page="/views/writemessage.cfm"/>
+		<page-view name="viewmessage" page="/views/viewmessage.cfm"/>
+		<page-view name="accountsettings" page="/views/accountsettings.cfm"/>
+		<page-view name="hello" page="/views/hello.cfm" />
+		<page-view name="loginForm" page="/views/loginForm.cfm" />
+		<page-view name="forgot" page="/views/forgot.cfm" />
+		<page-view name="userrole" page="/views/userrole.cfm" />
+		<page-view name="reportingunits" page="/views/reportingunits.cfm" />
+		<page-view name="assessmentplanlist" page="/views/assessmentplanlist.cfm" />
+		<page-view name="departmentplanlist" page="/views/departmentplanlist.cfm" />
+		<page-view name="departmentReview" page="/views/departmentreview.cfm" />
+		<page-view name="assessmentplansummary" page="/views/assessmentplansummary.cfm" />
+		<page-view name="assessmentplan" page="/views/assessmentplan.cfm" />
+		<page-view name="outcomedetails" page="/views/outcomedetails.cfm" />
+		<page-view name="reports" page="/views/reports.cfm" />
+		<page-view name="listUsers" page="/views/listUsers.cfm" />
+		<page-view name="mainMenu" page="/views/mainMenu.cfm" />
+		<page-view name="exception" page="/views/exception.cfm" />
+		<page-view name="upload" page="/views/upload.cfm" />
+		<page-view name="json" page="/views/json.cfm" />
+		<page-view name="taskjson" page="/views/taskjson.cfm" />
+		<page-view name="toJSON" page="/views/toJSON.cfm" />
+		<page-view name="grid" page="/views/grid.cfm" />		
+		<page-view name="reportGrid" page="/views/reportGrid.cfm" />
+		<page-view name="addPlanWizard" page="/views/addPlan.cfm" />
+		<page-view name="editPlan" page="/views/editPlan.cfm" />
+		<page-view name="addOutcome" page="/views/addOutcome.cfm" />
+		<page-view name="editOutcome" page="/views/editOutcome.cfm" />
+		<page-view name="viewALC" page="/views/viewALC.cfm" />
+		<page-view name="sentLogin" page="/views/sentLogin.cfm" />
+		<page-view name="checklistcomments" page="/views/checklistcomments.cfm" />		
+		<page-view name="assessmentplanstatus" page="/views/assessmentplanstatus.cfm" />
+		<page-view name="no_login" page="/views/no_login.cfm" />
+	</page-views>
+
+</mach-ii>

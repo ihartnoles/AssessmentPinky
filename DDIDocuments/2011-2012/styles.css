@@ -1,0 +1,170 @@
+BODY
+{
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: Verdana
+}
+TABLE
+{
+    FONT-SIZE: 8pt;
+
+}
+TR.HeaderRow
+{
+	font-weight: bolder;
+	font-size: 8pt;
+	color: white;
+	background-color: lightslategray;
+}
+TR.HeaderRow2
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 10pt
+}
+TR.HeaderRow3
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 9pt;
+    COLOR: black;
+    BACKGROUND-COLOR: white
+}
+TR.HeaderRow1
+{
+	font-weight: bolder;
+	font-size: 12pt;
+	color: white;
+	background-color: darkgray;
+}
+
+TR.HeaderRow5
+{
+	font-weight: bolder;
+	font-size: 10pt;
+	color: #c10435;
+	background-color: #ece8d8;
+}
+
+TR.HeaderRow6
+{
+	background-color: #f8f8f1;
+}
+TR.SelectedRow
+{
+	font-weight: bolder;
+	color: White;
+	background-color:Navy
+}
+TD.HeaderCell
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 10pt
+}
+TEXTAREA.TADisplay
+{
+    BACKGROUND-COLOR: darkgray
+}
+INPUT.TADisplay
+{
+    BACKGROUND-COLOR: darkgray
+}
+
+TEXTAREA.TAEdit
+{
+}
+TR.RowDisplay
+{
+    BACKGROUND-COLOR: white
+}
+A:visited
+{
+    COLOR: blue
+}
+TD.InstructionsCell
+{
+	font-size: 10pt;
+	color: white;
+	background-color: lightslategray;
+}
+BUTTON
+{
+    FONT-SIZE: 8pt
+}
+TR.InstructionsCell2
+{
+    FONT-WEIGHT: bolder
+}
+TR.ErrorCell
+{
+    FONT-WEIGHT: bolder;
+    COLOR: red
+}
+
+TD.WorkFlowRow
+{
+    BACKGROUND-COLOR: powderblue
+}
+HR
+{
+    COLOR: darkblue
+}
+SPAN
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 8pt
+}
+TR.HeaderRow4
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 10pt;
+    BACKGROUND-COLOR: silver
+}
+TABLE.NoteTable
+{
+    BACKGROUND-COLOR: #ffff99
+}
+IMG
+{
+    ALIGN: middle
+}
+INPUT
+{
+    FONT-SIZE: 7pt
+}
+SELECT
+{
+    FONT-SIZE: 8pt
+}
+TABLE.NoteTable2
+{
+    BACKGROUND-COLOR: white
+}
+.RedLink
+{
+	font-size: 10pt;
+	color: red;
+	font-weight:bold;
+}
+
+.YellowHighlight
+{
+	color: black;
+	background-color: yellow;
+}
+.DivBorder
+{
+	border-right: navy thin solid;
+	padding-right: 5px;
+	border-top: navy thin solid;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	border-left: navy thin solid;
+	padding-top: 5px;
+	border-bottom: navy thin solid;
+}
+
+.DivBorder2
+{
+	border-right: gainsboro thin solid;
+	border-top: gainsboro thin solid;
+	border-left: gainsboro thin solid;
+	border-bottom: gainsboro thin solid;
+}

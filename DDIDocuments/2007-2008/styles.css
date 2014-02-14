@@ -1,0 +1,497 @@
+BODY
+{
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: Verdana
+}
+TABLE
+{
+	font-size: 8pt;
+	font-family: Verdana;
+}
+TR.HeaderRow
+{
+	font-weight: bolder;
+	font-size: 10pt;
+	color: white;
+	background-color: darkblue;
+}
+TR.HeaderRow2
+{
+	font-weight: bolder;
+	font-size: 10pt;
+}
+TR.HeaderRow3
+{
+	font-weight: bolder;
+	font-size: 8pt;
+	color: black;
+	font-style: normal;
+	background-color: #eadba6;
+}
+TR.HeaderRow4
+{
+	font-weight: bolder;
+	font-size: 8pt;
+	color: black;
+	background-color: #fafad2;
+}
+TR.HeaderRow1
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12pt;
+    COLOR: white;
+    BACKGROUND-COLOR: darkblue
+}
+TD.HeaderCell
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 10pt
+}
+TD.HeaderCell3
+{
+	font-weight: bolder;
+	font-size: 7pt;
+	color: black;
+	font-style: normal;
+	background-color: gainsboro;
+	text-align: center;
+}
+TEXTAREA.TADisplay
+{
+    BACKGROUND-COLOR: darkgray
+}
+TEXTAREA.TAEdit
+{
+}
+TR.RowDisplay
+{
+    BACKGROUND-COLOR: white
+}
+
+TD.InstructionsCell
+{
+    FONT-SIZE: 10pt;
+    COLOR: white;
+    BACKGROUND-COLOR: darkblue
+}
+BUTTON
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: white;
+	background-color: #004598;
+}
+TR.InstructionsCell2
+{
+    FONT-WEIGHT: bolder
+}
+TR.ErrorCell
+{
+    FONT-WEIGHT: bolder;
+    COLOR: red
+}
+TD.WorkFlowRow
+{
+    BACKGROUND-COLOR: powderblue
+}
+HR
+{
+    COLOR: darkblue
+}
+
+HR.HRLight
+{
+	color: gainsboro;
+}
+SPAN
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 8pt
+}
+TR.HeaderRow4
+{
+	font-weight: bolder;
+	font-size: 8pt;
+	background-color: silver;
+}
+TABLE.NoteTable
+{
+    BACKGROUND-COLOR: lavender
+}
+IMG
+{
+    ALIGN: middle
+}
+INPUT
+{
+    FONT-SIZE: 8pt
+}
+SELECT
+{
+    FONT-SIZE: 8pt
+}
+FORM
+{
+	font-size: 8pt;
+	font-family: Verdana;
+}
+.CollegeTotal
+{
+	font-weight: bold;
+	color: black;
+	font-family: Arial;
+	background-color: #99cc99;
+}
+.ReportHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: white;
+	background-color: darkslategray;
+}
+.ReportHeader2
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: white;
+	background-color: gray;
+}
+
+.ReportDetailHeader
+{
+	background-color: lightgrey;
+}
+.DataCell
+{
+	text-align: right;
+}
+.CategoryCell
+{
+	font-weight: bold;
+	text-align: left;
+}
+.TotalRow
+{
+	font-weight: bold;
+}
+.DetailHeader
+{
+	font-weight: bold;
+	background-color: lightgrey;
+	text-align: center;
+}
+.PageHeader
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: white;
+	background-color: darkslategray;
+}
+.PRHeader
+{
+	border-top-width: thin;
+	font-weight: bold;
+	border-left-width: thin;
+	font-size: 10pt;
+	border-left-color: black;
+	border-bottom-width: thin;
+	border-bottom-color: black;
+	border-top-color: black;
+	background-color: silver;
+	border-right-width: thin;
+	border-right-color: black;
+}
+.PRSubHeader
+{
+	font-weight: bold;
+	font-size: 9pt;
+	background-color: lightcyan;
+}
+
+A:hover
+{
+	font-weight: bold;
+	color: firebrick;
+}
+
+
+A
+{
+	font-weight: bold;
+	color: #004598;
+}
+
+.ReportsButton
+{
+	font-weight: bold;
+	font-size: 8pt;
+	color: white;
+	background-color: #004598;
+}
+
+
+.HighlightReport
+{
+	font-weight: bold;
+	font-style: italic;
+	background-color: #eadba6;
+}
+
+.HighlightReport2
+{
+	border-top-style: ridge;
+	font-style: italic;
+	border-right-style: ridge;
+	border-left-style: ridge;
+	background-color: #eadba6;
+	border-bottom-style: ridge;
+}
+.Box
+{
+	border-right: #004598 1px solid;
+	border-top: #004598 1px solid;
+	border-left: #004598 1px solid;
+	border-bottom: #004598 1px solid;
+}
+.VarSelectCell
+{
+	font-weight: bold;
+	color: white;
+	background-color: #004598;
+	text-align: center;
+}
+.HeaderBlue
+{
+	font-weight: bold;
+	font-size: 11pt;
+	color: #004598;
+}
+
+.SelectedLink
+{
+	font-weight: bold;
+	color: black;
+	background-color: gainsboro;
+}
+
+
+.SystemFooter
+{
+	font-weight: bold;
+	font-size: 8pt;
+	font-style: italic;
+}
+
+.SystemTitle
+{
+	font-weight: bold;
+	font-size: 10pt;
+	color: #004598;
+}
+
+.BaseDiv
+{
+	position: absolute;
+	left: 10px;
+	top: 70px;
+	font-family: Verdana, sans-serif;
+	margin: 1px;
+	font-weight: bold;
+	text-align: center;
+	font-size: 10pt;
+
+	padding: 5px;
+	width: 100px;
+	height: 150px;
+	border-right: #ececec thin solid;
+	border-top: #ececec thin solid;
+	border-left: #ececec thin solid;
+	border-bottom: #ececec thin solid;
+}
+
+.CompareDiv
+{
+	position: absolute;
+	left:700px;
+	top: 70px;
+	font-family: Verdana, sans-serif;
+	margin: 1px;
+	font-weight: bold;
+	text-align: center;
+	font-size: 10pt;
+	background-color: #ececec;
+	padding: 5px;
+	width: 100px;
+	height:90px;
+
+}
+
+div.continue
+{
+	position: absolute;
+	width: 590px;
+	font-family: Verdana, sans-serif;
+	left: 110px;
+	top: 105px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.ContinueLine 
+{
+	position: relative; 
+	top:-5px;
+	width: 590px;
+	height: 2px;
+}
+
+div.transout
+{
+	position: absolute;
+	width: 178px;
+	font-family: Verdana, sans-serif;
+	left: 110px;
+	top: 106px;
+	font-weight: bold;
+}
+
+.transoutHLine 
+{
+	position: relative; 	
+	top: 11px;
+	width: 178px;
+	height: 2px;
+}
+
+.transoutVLine 
+{
+	position: relative; 	
+	width: 2px;
+	top: 8px;
+	left: 178px;
+	height: 22px;
+}
+
+.transoutText
+{
+	position: relative;
+	top: 9px;
+	left: 86px;
+	text-align: center;
+}
+
+
+div.drop
+{
+	position: absolute;
+	width: 120px;
+	font-family: Verdana, sans-serif;
+	left: 108px;
+	top: 110px;
+	font-weight: bold;
+}
+
+.dropHLine 
+{
+	position: relative; 	
+	top: 11px;
+	width: 120px;
+	height: 2px;
+}
+
+.dropVLine 
+{
+	position: relative; 	
+	width: 2px;
+	top: 8px;
+	left: 120px;
+	height: 17px;
+}
+
+.dropText
+{
+	position: relative;
+	top: 10px;
+	left: 59px;
+	text-align: center;
+}
+
+
+
+
+div.graduate
+{
+	position: absolute;
+	width: 50px;
+	font-family: Verdana, sans-serif;
+	left: 110px;
+	top: 110px;
+	font-weight: bold;
+}
+
+.GraduateHLine 
+{
+	position: relative; 	
+	top: 15px;
+	width: 50px;
+	height: 2px;
+}
+
+.GraduateVLine 
+{
+	position: relative; 	
+	width: 2px;
+	top: 11px;
+	left: 50px;
+	height: 15px;
+}
+
+.GraduateText
+{
+	position: relative;
+	top: 12px;
+	left: 25px;
+	text-align: center;
+}
+
+
+
+
+.SmallLink
+{
+	font-size: 7pt;
+}
+
+
+.l {text-align: left }
+.c {text-align: center }
+.r {text-align: right }
+.d {text-align: "." }
+.t {vertical-align: top }
+.m {vertical-align: middle }
+.b {vertical-align: bottom }
+TD, TH {vertical-align: top }
+.stacked_cell{padding: 0 }
+
+
+div.float 
+{
+	padding: 5px;
+	float: left;
+}
+
+.commentbox
+{
+	background-color: #ececec;
+	padding: 5px;
+}
+
+.commentfooter
+{
+	background: url(arrow_up.gif) 190px 1px no-repeat; /*20px 0 equals horizontal and vertical position of arrow. Adjust as desired (ie: 20px -5px).*/
+	padding-left: 70px;
+	padding-top: 1px;
+	margin-bottom: 0em;
+	font-size: 10pt;
+	font-weight: bold;
+}

@@ -1,0 +1,5 @@
+CategoryID,CategoryOrder,CategoryTitle,CategoryActive
+10001,1,Content Knowledge,1
+10002,2,Communication,1
+10003,3,Critical Thinking,1
+10004,4,Other,1
